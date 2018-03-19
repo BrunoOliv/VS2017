@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace CaixaEletronico
 {
-   class ContaCorrente : Conta, ITributavel
+   public class ContaCorrente : Conta, ITributavel
     {
         private static int totalDeContas = 0;
 
         public ContaCorrente()
         {
                 ContaCorrente.totalDeContas++;
+        }
+
+        public ContaCorrente(double saldo)
+        {
+            this.Saldo = saldo;
         }
 
         public int ProximaConta()

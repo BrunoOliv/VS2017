@@ -115,5 +115,24 @@ namespace CaixaEletronico
             escritor.Close();
             saida.Close();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var contas = new List<Conta>();
+            var conta1 = new ContaCorrente(2300);
+            var conta2 = new ContaCorrente(1000);
+            var conta3 = new ContaCorrente(2500);
+            contas.Add(conta1);
+            contas.Add(conta2);
+            contas.Add(conta3);
+
+            var filtradas = from c in contas        //LINQ
+                            where c.Saldo > 2000
+                            select c;
+
+            double saldoTotal = filtradas.Sum(c => c.Saldo);    //Lambda
+            MessageBox.Show("O total é: " + saldoTotal);
+
+        }
     }
 }
