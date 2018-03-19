@@ -134,5 +134,10 @@ namespace CaixaEletronico
             MessageBox.Show("O total é: " + saldoTotal);
 
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("conta".Pluralize());
+        }
     }
 }
