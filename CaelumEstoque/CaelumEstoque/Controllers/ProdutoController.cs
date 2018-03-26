@@ -10,7 +10,7 @@ namespace CaelumEstoque.Controllers
 {
     public class ProdutoController : Controller
     {
-        [Route("produtos", Name ="ListaProdutos")]
+        [Route("produtos", Name = "ListaProdutos")]
         public ActionResult Index()
         {
             ProdutosDAO dao = new ProdutosDAO();
@@ -31,7 +31,7 @@ namespace CaelumEstoque.Controllers
         public ActionResult Adiciona(Produto produto)
         {
             int idDaInformatica = 1;
-            if(produto.CategoriaId.Equals(idDaInformatica) && produto.Preco < 100)
+            if (produto.CategoriaId.Equals(idDaInformatica) && produto.Preco < 100)
             {
                 ModelState.AddModelError("produto.Invalido", "Informatica com preco abaixo de 100 reais");
             }
@@ -51,13 +51,22 @@ namespace CaelumEstoque.Controllers
             }
         }
 
-        [Route("produtos/{id}", Name ="VisualizaProduto")]
+        [Route("produtos/{id}", Name = "VisualizaProduto")]
         public ActionResult Visualiza(int id)
         {
             ProdutosDAO dao = new ProdutosDAO();
             Produto produto = dao.BuscaPorId(id);
             ViewBag.Produto = produto;
             return View();
+        }
+
+        public ActionResult DecrementaQtd(int id)
+        {
+            ProdutosDAO dao = new ProdutosDAO();
+            Produto produto = dao.BuscaPorId(id);
+            produto.Quantidade--;
+            dao.Atualiza(produto);
+            return Json(produto);
         }
     }
 }
